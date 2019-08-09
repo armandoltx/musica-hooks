@@ -14,7 +14,7 @@ function Formulario({ consultarAPILetra }) {
     agregarBusqueda({
       // tomamos una copia de lo q hay en el state para no modificarlo y solo anadir datos
       ...busqueda,
-      [e.target.name] : [ e.target.value]
+      [e.target.name] : e.target.value
       // el name que esta en el formulario (ej: name="artista") tiene q coincidir con el key del state "artista"
     })
     // para comprobar q funciona:

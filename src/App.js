@@ -1,4 +1,5 @@
 import React, {useState, useEffect, Fragment} from 'react';
+import axios from 'axios';
 import Formulario from './components/Formulario';
 
 function App() {
@@ -9,8 +10,19 @@ function App() {
   const [info, agregarInfo] = useState({});
 
   // Crear metodo para consultar la API de Letras de Canciones
-  const consultarAPILetra = (busqueda) => { // aqui lo podemos llamar como queramos el parametro pero usaremos busqueda
-    console.log('dentro de consultarAPILetra en App.js ', busqueda);
+  const consultarAPILetra = async (busqueda) => { // aqui lo podemos llamar como queramos el parametro pero usaremos busqueda
+    //console.log('dentro de consultarAPILetra en App.js ', busqueda);
+    const {artista, cancion} = busqueda; // aplicando destructuring
+    const url = `https://api.lyrics.ovh/v1/${artista}/${cancion}`;
+
+    // usar axios
+    const resultado = await axios(url);
+
+    //console.log(resultado.data.lyrics);
+
+    // alamcenar la letra en el state
+    agregarLetra(resultado.data.lyrics);
+
   }
   return (
     <Fragment>
