@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Formulario() {
+function Formulario({ consultarAPILetra }) {
 
   // el state inicia como un objeto vacio para acceder a los valores del formulario
   const [busqueda, agregarBusqueda] = useState({
@@ -18,14 +18,24 @@ function Formulario() {
       // el name que esta en el formulario (ej: name="artista") tiene q coincidir con el key del state "artista"
     })
     // para comprobar q funciona:
-    console.log(busqueda);
+    // console.log(busqueda);
   } // el siquiente paso es anadirla a los inputs en los cuales queremos actualizar el state
+
+  // cuando hacemos submit al form
+  const enviarInformacion = (event) => {
+    // se presenta un evento que no queremos que ocurra
+    event.preventDefault();
+    // pasamos la funcion que tenemos en App => consulratAPILetra
+    // anadimos props cuando definimos la funcion Formulario(props) podemos hacer destructuring y quitar props
+    consultarAPILetra(busqueda); // pasamos busqueda a esta funcion y asi pasamos los datos a App.js
+  }
 
   return(
     <div className="bg-info">
         <div className="container">
             <div className="row">
-                <form 
+                <form
+                  onSubmit={enviarInformacion} // se suele llamar hadleSumbit
                   className="col card text-white bg-transparent  mb-5 pt-5 pb-2">
                     <fieldset>
                         <legend className="text-center">Buscador Letras Canciones</legend>
