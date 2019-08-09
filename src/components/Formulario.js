@@ -1,6 +1,26 @@
 import React, { useState } from 'react';
 
 function Formulario() {
+
+  // el state inicia como un objeto vacio para acceder a los valores del formulario
+  const [busqueda, agregarBusqueda] = useState({
+    artista: '',
+    cancion: ''
+  })
+  // funcion para actualizar el state de los inputs
+  const actualizarState = (e) => {
+    // le pasamos un evento e para acceder a los valores del formulario
+    // utilizamos la funcion para actualizar el state:
+    agregarBusqueda({
+      // tomamos una copia de lo q hay en el state para no modificarlo y solo anadir datos
+      ...busqueda,
+      [e.target.name] : [ e.target.value]
+      // el name que esta en el formulario (ej: name="artista") tiene q coincidir con el key del state "artista"
+    })
+    // para comprobar q funciona:
+    console.log(busqueda);
+  } // el siquiente paso es anadirla a los inputs en los cuales queremos actualizar el state
+
   return(
     <div className="bg-info">
         <div className="container">
@@ -17,7 +37,8 @@ function Formulario() {
                                       type="text" 
                                       className="form-control" 
                                       name="artista" 
-                                      placeholder="Nombre Artista" 
+                                      placeholder="Nombre Artista"
+                                      onChange={actualizarState}
                                       required
                                   />
                               </div>
@@ -29,7 +50,8 @@ function Formulario() {
                                       type="text" 
                                       className="form-control" 
                                       name="cancion" 
-                                      placeholder="Nombre Canción" 
+                                      placeholder="Nombre Canción"
+                                      onChange={actualizarState}
                                       required
                                   />
                               </div>
