@@ -1,6 +1,7 @@
 import React, {useState, useEffect, Fragment} from 'react';
 import axios from 'axios';
 import Formulario from './components/Formulario';
+import Cancion from './components/Cancion';
 
 function App() {
   // Se se puede utilizar useState de 2 formas distintas, usar cada state por separado o crear un arreglo.
@@ -27,6 +28,17 @@ function App() {
   return (
     <Fragment>
       <Formulario consultarAPILetra={consultarAPILetra} />
+
+      <div className="container mt-5">
+        <div lassName="row">
+          <div className="col-md-6">HERE</div>
+          <div className="col-md-6">
+            <Cancion 
+              letra={letra}
+            />
+          </div>
+        </div>
+      </div>
 
     </Fragment>
   );
