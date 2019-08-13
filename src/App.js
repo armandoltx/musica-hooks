@@ -24,13 +24,40 @@ function App() {
     // alamcenar la letra en el state
     agregarLetra(resultado.data.lyrics);
 
+    // almacenar el artista que se busco
+    agregarArtista(artista);
+
   }
+
+  // Crear metodo para consultar la API de Informacion de la banda o grupo
+
+  const consultarAPIInfo = async () => {
+    const url = `https://theaudiodb.com/api/v1/json/1/search.php?s=${artista}`;
+
+    const resultado = await axios(url);
+
+    // console.log(resultado.data.artists[0]);
+    agregarInfo(resultado.data.artists[0]);
+    
+    console.log(info); // ahora podemos ver el state q se ha cambiado en la funcion anterior
+
+  }
+
+  useEffect(
+    () => {
+      //console.log('Agregaste un artista');
+      consultarAPIInfo();
+    }, [artista] // este viene del state, y los cambios vienen de consultarAPILetra
+  );
+
+
+
   return (
     <Fragment>
       <Formulario consultarAPILetra={consultarAPILetra} />
 
       <div className="container mt-5">
-        <div lassName="row">
+        <div className="row">
           <div className="col-md-6">HERE</div>
           <div className="col-md-6">
             <Cancion 
