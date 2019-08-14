@@ -43,10 +43,10 @@ function Formulario({ consultarAPILetra }) {
                             <div className="col-md-6">
                               <div className="form-group">
                                   <label>Artista</label>
-                                  <input 
-                                      type="text" 
-                                      className="form-control" 
-                                      name="artista" 
+                                  <input
+                                      type="text"
+                                      className="form-control"
+                                      name="artista"
                                       placeholder="Nombre Artista"
                                       onChange={actualizarState}
                                       required
@@ -56,10 +56,10 @@ function Formulario({ consultarAPILetra }) {
                             <div className="col-md-6">
                               <div className="form-group">
                                   <label>Canción</label>
-                                  <input 
-                                      type="text" 
-                                      className="form-control" 
-                                      name="cancion" 
+                                  <input
+                                      type="text"
+                                      className="form-control"
+                                      name="cancion"
                                       placeholder="Nombre Canción"
                                       onChange={actualizarState}
                                       required

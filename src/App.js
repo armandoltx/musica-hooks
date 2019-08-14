@@ -2,6 +2,7 @@ import React, {useState, useEffect, Fragment} from 'react';
 import axios from 'axios';
 import Formulario from './components/Formulario';
 import Cancion from './components/Cancion';
+import Informacion from './components/Informacion';
 
 function App() {
   // Se se puede utilizar useState de 2 formas distintas, usar cada state por separado o crear un arreglo.
@@ -32,15 +33,17 @@ function App() {
   // Crear metodo para consultar la API de Informacion de la banda o grupo
 
   const consultarAPIInfo = async () => {
-    const url = `https://theaudiodb.com/api/v1/json/1/search.php?s=${artista}`;
+    // como la api nada mas cargar hace una consulta, para prevenir esto, cambiamos todo el codigo yu q ocurra si hay un artista:
+    if(artista) {
+      const url = `https://theaudiodb.com/api/v1/json/1/search.php?s=${artista}`;
 
-    const resultado = await axios(url);
+      const resultado = await axios(url);
 
-    // console.log(resultado.data.artists[0]);
-    agregarInfo(resultado.data.artists[0]);
-    
-    console.log(info); // ahora podemos ver el state q se ha cambiado en la funcion anterior
+      // console.log(resultado.data.artists[0]);
+      agregarInfo(resultado.data.artists[0]);
 
+      console.log(info); // ahora podemos ver el state q se ha cambiado en la funcion anterior
+    }
   }
 
   useEffect(
@@ -58,7 +61,11 @@ function App() {
 
       <div className="container mt-5">
         <div className="row">
-          <div className="col-md-6">HERE</div>
+          <div className="col-md-6">
+            <Informacion
+              info={info}
+            />
+          </div>
           <div className="col-md-6">
             <Cancion 
               letra={letra}
