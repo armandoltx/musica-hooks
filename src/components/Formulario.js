@@ -7,7 +7,17 @@ function Formulario({ consultarAPILetra }) {
     artista: '',
     cancion: ''
   })
-  // funcion para actualizar el state de los inputs
+  // el name del formulario tiene que ser igaual al nombre del state para que funcione la tecnica q usamos para leer el state de forma sencilla.
+
+  const [error, guardarError] = useState(false);
+
+  // extraemos artista y cancion y lo colocamos como los values de los inputs:
+
+  const { artista, cancion } = busqueda;
+
+
+
+  // funcion a cada input para leer su contenido y para actualizar el state de los inputs
   const actualizarState = (e) => {
     // le pasamos un evento e para acceder a los valores del formulario
     // utilizamos la funcion para actualizar el state:
@@ -21,10 +31,18 @@ function Formulario({ consultarAPILetra }) {
     // console.log(busqueda);
   } // el siquiente paso es anadirla a los inputs en los cuales queremos actualizar el state
 
-  // cuando hacemos submit al form
+  // cuando hacemos submit al form consulramos las APIS
   const enviarInformacion = (event) => {
     // se presenta un evento que no queremos que ocurra
     event.preventDefault();
+
+    // VALIDAMOS
+    if(artista.trim() === '' || cancion.trim() === '') {
+      guardarError(true);
+    }
+
+    guardarError(false);
+
     // pasamos la funcion que tenemos en App => consulratAPILetra
     // anadimos props cuando definimos la funcion Formulario(props) podemos hacer destructuring y quitar props
     consultarAPILetra(busqueda); // pasamos busqueda a esta funcion y asi pasamos los datos a App.js
@@ -32,6 +50,7 @@ function Formulario({ consultarAPILetra }) {
 
   return(
     <div className="bg-info">
+      {error ? <p className="alert alert-danger text-center p-2">Todos los campos son obligatorios</p> : null}
         <div className="container">
             <div className="row">
                 <form
@@ -49,6 +68,7 @@ function Formulario({ consultarAPILetra }) {
                                       name="artista"
                                       placeholder="Nombre Artista"
                                       onChange={actualizarState}
+                                      value={artista}
                                       required
                                   />
                               </div>
@@ -62,6 +82,7 @@ function Formulario({ consultarAPILetra }) {
                                       name="cancion"
                                       placeholder="Nombre Canción"
                                       onChange={actualizarState}
+                                      value={cancion}
                                       required
                                   />
                               </div>
